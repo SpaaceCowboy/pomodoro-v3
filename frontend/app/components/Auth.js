@@ -13,8 +13,8 @@ export default function Auth({ onLogin }) {
     e.preventDefault();
     setError('');
     const url = isRegister 
-      ? 'http://localhost:5000/api/auth/register'
-      : 'http://localhost:5000/api/auth/login';
+      ? 'https://pomodoro-v2.onrender.com/api/auth/register'
+      : 'https://pomodoro-v2.onrender.com/api/auth/login';
 
     try {
       const res = await axios.post(url, { email, password });

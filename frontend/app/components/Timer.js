@@ -56,10 +56,10 @@ export default function Timer() {
       const loadData = async () => {
         try {
           const [sessRes, weeklyRes] = await Promise.all([
-            axios.get(`http://localhost:5000/api/timer/sessions/${decoded.id}`, {
+            axios.get(`https://pomodoro-v2.onrender.com/api/timer/sessions/${decoded.id}`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
-            axios.get(`http://localhost:5000/api/timer/weekly/${decoded.id}`, {
+            axios.get(`https://pomodoro-v2.onrender.com/api/timer/weekly/${decoded.id}`, {
               headers: { Authorization: `Bearer ${token}` },
             }),
           ]);
@@ -109,7 +109,7 @@ export default function Timer() {
 
     if (isFocus && user) {
       axios.post(
-        'http://localhost:5000/api/timer/session',
+        'https://pomodoro-v2.onrender.com/timer/session',
         { userId: user.id, session },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );
