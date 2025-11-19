@@ -12,14 +12,13 @@ export default function Auth({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const url = isRegister 
-      ? 'http://localhost:5000/api/auth/register'
-      : 'http://localhost:5000/api/auth/login';
-
+    const API_BASE = 'hhttps://pomodoro-back.onrender.com/';  // ← YOUR RENDER URL HERE
+    const endpoint = isRegister ? '/register' : '/login';
     try {
-      const res = await axios.post(url, { email, password });
+      const res = await axios.post(`${API_BASE}/api/auth${endpoint}`, { email, password });
       localStorage.setItem('token', res.data.token);
-      onLogin({ id: res.data.user._id || res.data.user.id, email: res.data.user.email });
+      onLogin({ id: res.data.user.id, email: res.data.user.email });
+      window.location.reload();
     } catch (err) {
       setError(err.response?.data?.msg || 'Something went wrong');
     }

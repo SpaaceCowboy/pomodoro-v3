@@ -22,7 +22,19 @@ import {
 } from 'recharts';
 import Auth from './Auth';
 
+const API_BASE = 'https://pomodoro-back.onrender.com/'
+
 export default function Timer() {
+  const fetchSessions = async (userId) => {
+    try {
+      const res = await axios.get(`${API_BASE}/api/timer/sessions/${userId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      setSessions(res.data.filter(s => s.type === 'focus'));
+    } catch (err) {
+      setSessions([]);  // Fallback to empty
+    }
+  };
   const [user, setUser] = useState(null);
   const [timeLeft, setTimeLeft] = useState(30 * 60);
   const [isRunning, setIsRunning] = useState(false);
@@ -52,7 +64,7 @@ export default function Timer() {
     try {
       const decoded = jwtDecode(token);
       setUser({ id: decoded.id, email: decoded.email || 'User' });
-
+      https://pomodoro-back.onrender.com/
       const loadData = async () => {
         try {
           const [sessRes, weeklyRes] = await Promise.all([
