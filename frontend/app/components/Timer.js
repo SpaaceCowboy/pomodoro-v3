@@ -64,7 +64,6 @@ export default function Timer() {
     try {
       const decoded = jwtDecode(token);
       setUser({ id: decoded.id, email: decoded.email || 'User' });
-      https://pomodoro-back.onrender.com/
       const loadData = async () => {
         try {
           const [sessRes, weeklyRes] = await Promise.all([
